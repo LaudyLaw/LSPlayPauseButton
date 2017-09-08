@@ -7,7 +7,7 @@ The initial version just include the style of iqiyi, and the style of youku will
 
 I'll add Cocoapods support later, please keep following of new version.
 
-## 汉语
+## 中文
 这是一个使用Swift重写的 [XLPlayButton](https://github.com/mengxianliang/XLPlayButton)， 感谢[XianLiang Meng](https://github.com/mengxianliang)
 
 当前只是一个初始版本，使用swift改写了爱奇艺播放暂停按钮动画的部分，优酷样式的将在后续添加，欢迎持续关注
