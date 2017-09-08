@@ -6,6 +6,7 @@
 //  Copyright © 2017年 LuoSong. All rights reserved.
 //
 
+import LSPlayPauseButton
 import UIKit
 
 class ViewController: UIViewController {

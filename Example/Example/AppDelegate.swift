@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  LSPlayPauseButton
+//  Example
 //
 //  Created by Pisen_LuoSong on 2017/9/8.
 //  Copyright © 2017年 LuoSong. All rights reserved.

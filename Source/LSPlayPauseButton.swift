@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum PlayButtonState {
+public enum PlayButtonState {
     case play
     case pause
 }
 
-class LSPlayPauseButton: UIButton {
+public class LSPlayPauseButton: UIButton {
     
     //MARK: private properties
     fileprivate let triangleLayer = CAShapeLayer()
@@ -61,14 +61,14 @@ class LSPlayPauseButton: UIButton {
     }
     
     //MARK: lifecycle
-    init(frame: CGRect, state: PlayButtonState = .play) {
+    public init(frame: CGRect, state: PlayButtonState = .play) {
         super.init(frame: frame)
         frameWidth = frame.width
         
         createUI()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -260,7 +260,7 @@ class LSPlayPauseButton: UIButton {
 }
 
 extension LSPlayPauseButton: CAAnimationDelegate {
-    func animationDidStart(_ anim: CAAnimation) {
+    public func animationDidStart(_ anim: CAAnimation) {
         let animationName = anim.value(forKey: "animationName") as? String
         if animationName == triangleAnimation {
             triangleLayer.lineCap = kCALineCapRound
@@ -269,7 +269,7 @@ extension LSPlayPauseButton: CAAnimationDelegate {
         }
     }
     
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+    public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         let animationName = anim.value(forKey: "animationName") as? String
         if animationName == rightLineAnimation {
             rightLineLayer.lineCap = kCALineCapButt
