@@ -12,15 +12,20 @@ import UIKit
 class ViewController: UIViewController {
     //MARK: private properties
     var iqiyiPlayPauseButton: LSPlayPauseButton?
+    var youkuPlayPauseButton: LSPlayPauseButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         iqiyiPlayPauseButton = LSPlayPauseButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        iqiyiPlayPauseButton?.center = CGPoint(x: view.center.x, y: view.bounds.height * 2.0 / 3.0)
+        iqiyiPlayPauseButton?.center = CGPoint(x: view.center.x, y: view.bounds.height / 3.0)
         iqiyiPlayPauseButton?.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
-        
         view.addSubview(iqiyiPlayPauseButton!)
+        
+        youkuPlayPauseButton = LSPlayPauseButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60), style: .youku)
+        youkuPlayPauseButton?.center = CGPoint(x: view.center.x, y: view.bounds.height * 2.0 / 3.0)
+        youkuPlayPauseButton?.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
+        view.addSubview(youkuPlayPauseButton!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +35,7 @@ class ViewController: UIViewController {
     
     //MARK: Actions
     @objc private func buttonClicked(_ button: LSPlayPauseButton) {
-        if button == iqiyiPlayPauseButton {
+        if button == iqiyiPlayPauseButton || button == youkuPlayPauseButton {
             button.buttonState = button.buttonState == .play ? .pause : .play
         }
     }
