@@ -24,13 +24,13 @@ public class LSPlayPauseButton: UIButton {
     private var isAnimating = false
     private var frameWidth: CGFloat = 0.0
     //MARK: const vars
-    fileprivate let normalAnimationDurition = 0.5
-    fileprivate let positionAnimationDurition = 0.3
+    fileprivate let kAnimationDuritionNormal = 0.5
+    fileprivate let kAnimationDuritionPosition = 0.3
     
     fileprivate let kColorLine = UIColor(red: 12.0 / 255.0, green: 190.0 / 255.0, blue: 6.0 / 255.0, alpha: 1)
     
-    fileprivate let triangleAnimationName = "triangleAnimationName"
-    fileprivate let rightLineAnimationName = "rightLineAnimationName"
+    fileprivate let kAnimationNameTriangle = "kAnimationNameTriangle"
+    fileprivate let kAnimationNameRightLine = "kAnimationNameRightLine"
     
     //MARK: public properties
     public var buttonState = PlayButtonState.pause {
@@ -42,18 +42,18 @@ public class LSPlayPauseButton: UIButton {
             if buttonState == .play {
                 isAnimating = true
                 pauseToPlayLineAnimation()
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + positionAnimationDurition, execute: { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + kAnimationDuritionPosition, execute: { [weak self] in
                     self?.pauseToPlayNormalAnimation()
                 })
             } else if buttonState == .pause {
                 isAnimating = true
                 playToPauseLineAnimation()
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + positionAnimationDurition, execute: { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + kAnimationDuritionPosition, execute: { [weak self] in
                     self?.playToPauseNormalAnimation()
                 })
             }
             
-            let totalAnimationDurition = positionAnimationDurition + normalAnimationDurition
+            let totalAnimationDurition = kAnimationDuritionPosition + kAnimationDuritionNormal
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + totalAnimationDurition) { [weak self] in
                 self?.isAnimating = false
             }
@@ -134,36 +134,36 @@ public class LSPlayPauseButton: UIButton {
     
     //MARK: Animation Implemation
     private func pauseToPlayNormalAnimation() {
-        strokeEndAnimation(from: 0.0, to: 1.0, on: triangleLayer, name: triangleAnimationName, duration: normalAnimationDurition, delegate: self)
-        strokeEndAnimation(from: 1.0, to: 0.0, on: rightLineLayer, name: rightLineAnimationName, duration: normalAnimationDurition / 4.0, delegate: self)
-        strokeEndAnimation(from: 0.0, to: 1.0, on: circleLayer, name: nil, duration: normalAnimationDurition / 4.0, delegate: self)
+        strokeEndAnimation(from: 0.0, to: 1.0, on: triangleLayer, name: kAnimationNameTriangle, duration: kAnimationDuritionNormal, delegate: self)
+        strokeEndAnimation(from: 1.0, to: 0.0, on: rightLineLayer, name: kAnimationNameRightLine, duration: kAnimationDuritionNormal / 4.0, delegate: self)
+        strokeEndAnimation(from: 0.0, to: 1.0, on: circleLayer, name: nil, duration: kAnimationDuritionNormal / 4.0, delegate: self)
         
-        var deadline = DispatchTime.now() + normalAnimationDurition * 0.25
+        var deadline = DispatchTime.now() + kAnimationDuritionNormal * 0.25
         DispatchQueue.main.asyncAfter(deadline: deadline) { [weak self] in
             self?.circleStartAnimation(from: 0.0, to: 1.0)
         }
-        deadline = DispatchTime.now() + normalAnimationDurition * 0.5
+        deadline = DispatchTime.now() + kAnimationDuritionNormal * 0.5
         DispatchQueue.main.asyncAfter(deadline: deadline) {  [weak self] in
             if let strongSelf = self {
-                strongSelf.strokeEndAnimation(from: 1.0, to: 0.0, on: strongSelf.leftLineLayer, name: nil, duration: strongSelf.normalAnimationDurition * 0.5, delegate: nil)
+                strongSelf.strokeEndAnimation(from: 1.0, to: 0.0, on: strongSelf.leftLineLayer, name: nil, duration: strongSelf.kAnimationDuritionNormal * 0.5, delegate: nil)
             }
         }
     }
     
     private func playToPauseNormalAnimation() {
-        strokeEndAnimation(from: 1.0, to: 0.0, on: triangleLayer, name: triangleAnimationName, duration: normalAnimationDurition, delegate: self)
-        strokeEndAnimation(from: 0.0, to: 1.0, on: leftLineLayer, name: nil, duration: normalAnimationDurition * 0.5, delegate: nil)
-        var deadline = DispatchTime.now() + normalAnimationDurition * 0.5
+        strokeEndAnimation(from: 1.0, to: 0.0, on: triangleLayer, name: kAnimationNameTriangle, duration: kAnimationDuritionNormal, delegate: self)
+        strokeEndAnimation(from: 0.0, to: 1.0, on: leftLineLayer, name: nil, duration: kAnimationDuritionNormal * 0.5, delegate: nil)
+        var deadline = DispatchTime.now() + kAnimationDuritionNormal * 0.5
         DispatchQueue.main.asyncAfter(deadline: deadline) { [weak self] in
             if let strongSelf = self {
                 strongSelf.circleStartAnimation(from: 1.0, to: 0.0)
             }
         }
-        deadline = DispatchTime.now() + normalAnimationDurition * 0.75
+        deadline = DispatchTime.now() + kAnimationDuritionNormal * 0.75
         DispatchQueue.main.asyncAfter(deadline: deadline) { [weak self] in
             if let strongSelf = self {
-                strongSelf.strokeEndAnimation(from: 0.0, to: 1.0, on: strongSelf.rightLineLayer, name: strongSelf.rightLineAnimationName, duration: strongSelf.normalAnimationDurition * 0.25, delegate: strongSelf)
-                strongSelf.strokeEndAnimation(from: 1.0, to: 0.0, on: strongSelf.circleLayer, name: nil, duration: strongSelf.normalAnimationDurition * 0.25, delegate: nil)
+                strongSelf.strokeEndAnimation(from: 0.0, to: 1.0, on: strongSelf.rightLineLayer, name: strongSelf.kAnimationNameRightLine, duration: strongSelf.kAnimationDuritionNormal * 0.25, delegate: strongSelf)
+                strongSelf.strokeEndAnimation(from: 1.0, to: 0.0, on: strongSelf.circleLayer, name: nil, duration: strongSelf.kAnimationDuritionNormal * 0.25, delegate: nil)
             }
         }
     }
@@ -184,7 +184,7 @@ public class LSPlayPauseButton: UIButton {
     
     private func circleStartAnimation(from: CGFloat, to: CGFloat) {
         let circleAnimation = CABasicAnimation(keyPath: "strokeStart")
-        circleAnimation.duration = normalAnimationDurition * 0.25
+        circleAnimation.duration = kAnimationDuritionNormal * 0.25
         circleAnimation.fromValue = from
         circleAnimation.toValue = to
         circleAnimation.fillMode = kCAFillModeForwards
@@ -198,27 +198,27 @@ public class LSPlayPauseButton: UIButton {
         leftPath1.move(to: CGPoint(x: frameWidth * 0.2, y: frameWidth * 0.4))
         leftPath1.addLine(to: CGPoint(x: frameWidth * 0.2, y: frameWidth))
         leftLineLayer.path = leftPath1.cgPath
-        leftLineLayer.add(pathAnimation(with: positionAnimationDurition * 0.5), forKey: nil)
+        leftLineLayer.add(pathAnimation(with: kAnimationDuritionPosition * 0.5), forKey: nil)
         
         let rightPath1 = UIBezierPath()
         rightPath1.move(to: CGPoint(x: frameWidth * 0.8, y: frameWidth * 0.8))
         rightPath1.addLine(to: CGPoint(x: frameWidth * 0.8, y: -(frameWidth * 0.2)))
         rightLineLayer.path = rightPath1.cgPath
-        rightLineLayer.add(pathAnimation(with: positionAnimationDurition * 0.5), forKey: nil)
+        rightLineLayer.add(pathAnimation(with: kAnimationDuritionPosition * 0.5), forKey: nil)
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + positionAnimationDurition * 0.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + kAnimationDuritionPosition * 0.5) { [weak self] in
             if let strongSelf = self {
                 let leftPath2 = UIBezierPath()
                 leftPath2.move(to: CGPoint(x: strongSelf.frameWidth * 0.2, y: strongSelf.frameWidth * 0.2))
                 leftPath2.addLine(to: CGPoint(x: strongSelf.frameWidth * 0.2, y: strongSelf.frameWidth * 0.8))
                 strongSelf.leftLineLayer.path = leftPath2.cgPath
-                strongSelf.leftLineLayer.add(strongSelf.pathAnimation(with: strongSelf.positionAnimationDurition * 0.5), forKey: nil)
+                strongSelf.leftLineLayer.add(strongSelf.pathAnimation(with: strongSelf.kAnimationDuritionPosition * 0.5), forKey: nil)
                 
                 let rightPath2 = UIBezierPath()
                 rightPath2.move(to: CGPoint(x: strongSelf.frameWidth * 0.8, y: strongSelf.frameWidth * 0.8))
                 rightPath2.addLine(to: CGPoint(x: strongSelf.frameWidth * 0.8, y: strongSelf.frameWidth * 0.2))
                 strongSelf.rightLineLayer.path = rightPath2.cgPath
-                strongSelf.rightLineLayer.add(strongSelf.pathAnimation(with: strongSelf.positionAnimationDurition * 0.5), forKey: nil)
+                strongSelf.rightLineLayer.add(strongSelf.pathAnimation(with: strongSelf.kAnimationDuritionPosition * 0.5), forKey: nil)
             }
         }
     }
@@ -228,27 +228,27 @@ public class LSPlayPauseButton: UIButton {
         leftPath1.move(to: CGPoint(x: frameWidth * 0.2, y: frameWidth * 0.4))
         leftPath1.addLine(to: CGPoint(x: frameWidth * 0.2, y: frameWidth))
         leftLineLayer.path = leftPath1.cgPath
-        leftLineLayer.add(pathAnimation(with: positionAnimationDurition * 0.5), forKey: nil)
+        leftLineLayer.add(pathAnimation(with: kAnimationDuritionPosition * 0.5), forKey: nil)
         
         let rightPath1 = UIBezierPath()
         rightPath1.move(to: CGPoint(x: frameWidth * 0.8, y: frameWidth * 0.8))
         rightPath1.addLine(to: CGPoint(x: frameWidth * 0.8, y: -(frameWidth * 0.2)))
         rightLineLayer.path = rightPath1.cgPath
-        rightLineLayer.add(pathAnimation(with: positionAnimationDurition * 0.5), forKey: nil)
+        rightLineLayer.add(pathAnimation(with: kAnimationDuritionPosition * 0.5), forKey: nil)
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + positionAnimationDurition * 0.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + kAnimationDuritionPosition * 0.5) { [weak self] in
             if let strongSelf = self {
                 let leftPath2 = UIBezierPath()
                 leftPath2.move(to: CGPoint(x: strongSelf.frameWidth * 0.2, y: 0.0))
                 leftPath2.addLine(to: CGPoint(x: strongSelf.frameWidth * 0.2, y: strongSelf.frameWidth))
                 strongSelf.leftLineLayer.path = leftPath2.cgPath
-                strongSelf.leftLineLayer.add(strongSelf.pathAnimation(with: strongSelf.positionAnimationDurition * 0.5), forKey: nil)
+                strongSelf.leftLineLayer.add(strongSelf.pathAnimation(with: strongSelf.kAnimationDuritionPosition * 0.5), forKey: nil)
                 
                 let rightPath2 = UIBezierPath()
                 rightPath2.move(to: CGPoint(x: strongSelf.frameWidth * 0.8, y: strongSelf.frameWidth))
                 rightPath2.addLine(to: CGPoint(x: strongSelf.frameWidth * 0.8, y: 0.0))
                 strongSelf.rightLineLayer.path = rightPath2.cgPath
-                strongSelf.rightLineLayer.add(strongSelf.pathAnimation(with: strongSelf.positionAnimationDurition * 0.5), forKey: nil)
+                strongSelf.rightLineLayer.add(strongSelf.pathAnimation(with: strongSelf.kAnimationDuritionPosition * 0.5), forKey: nil)
             }
         }
     }
@@ -266,18 +266,18 @@ public class LSPlayPauseButton: UIButton {
 extension LSPlayPauseButton: CAAnimationDelegate {
     public func animationDidStart(_ anim: CAAnimation) {
         let animationName = anim.value(forKey: "animationName") as? String
-        if animationName == triangleAnimationName {
+        if animationName == kAnimationNameTriangle {
             triangleLayer.lineCap = kCALineCapRound
-        } else if animationName == rightLineAnimationName {
+        } else if animationName == kAnimationNameRightLine {
             rightLineLayer.lineCap = kCALineCapRound
         }
     }
     
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         let animationName = anim.value(forKey: "animationName") as? String
-        if buttonState == .play && animationName == rightLineAnimationName {
+        if buttonState == .play && animationName == kAnimationNameRightLine {
             rightLineLayer.lineCap = kCALineCapButt
-        } else if animationName == triangleAnimationName {
+        } else if animationName == kAnimationNameTriangle {
             triangleLayer.lineCap = kCALineCapButt
         }
     }
