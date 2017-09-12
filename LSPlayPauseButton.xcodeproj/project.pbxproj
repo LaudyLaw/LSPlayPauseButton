@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9421629B1F6277B5007013FE /* LSPlayPauseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 942162991F6277B5007013FE /* LSPlayPauseButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		942162A31F62780A007013FE /* LSPlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942162A21F62780A007013FE /* LSPlayPauseButton.swift */; };
+		942162D51F67CD70007013FE /* LSPlayPauseButton.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 942162D41F67CD70007013FE /* LSPlayPauseButton.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		942162991F6277B5007013FE /* LSPlayPauseButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSPlayPauseButton.h; sourceTree = "<group>"; };
 		9421629A1F6277B5007013FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		942162A21F62780A007013FE /* LSPlayPauseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSPlayPauseButton.swift; sourceTree = "<group>"; };
+		942162D41F67CD70007013FE /* LSPlayPauseButton.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LSPlayPauseButton.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 		942162981F6277B5007013FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				942162D41F67CD70007013FE /* LSPlayPauseButton.podspec */,
 				942162991F6277B5007013FE /* LSPlayPauseButton.h */,
 				9421629A1F6277B5007013FE /* Info.plist */,
 			);
@@ -133,6 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942162D51F67CD70007013FE /* LSPlayPauseButton.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +265,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LSPlayPauseButton/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.luosong.LSPlayPauseButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -279,6 +284,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LSPlayPauseButton/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.luosong.LSPlayPauseButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
