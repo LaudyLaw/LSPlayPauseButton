@@ -95,7 +95,7 @@ public class LSPlayPauseButton: UIButton {
     }
     
     //MARK: lifecycle
-    public init(frame: CGRect, style: LSPlayButtonStyle = .iqiyi, state: LSPlayButtonState = .play) {
+    public init(frame: CGRect, style: LSPlayButtonStyle = .iqiyi, state: LSPlayButtonState = .pause) {
         super.init(frame: frame)
         frameWidth = frame.width
         buttonStyle = style
