@@ -33,8 +33,18 @@ or
 button.buttonState = .pause
 ```
 
-### Others
-I'll add Cocoapods support later, please keep following of new version.
+### Installation with CocoaPods
+
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+
+target 'TargetName' do
+use_frameworks!
+pod 'LSPlayPauseButton'
+end
+```
 
 ## 中文
 ### 简介
@@ -67,5 +77,10 @@ button.buttonState = .play
 ```swift
 button.buttonState = .pause
 ```
-### 其他
-后续会添加Cocoapods的支持，敬请关注
+### 使用Cocoapods进行安装
+Cocoapods是一个非常方便使用三方库的工具，如果你还不知道Cocoapods，请点击[Cocoapods](http://cocoapods.org)前往查看使用方法。
+在你的Podfile文件中添加
+
+```
+pod 'LSPlayPauseButton'
+```
